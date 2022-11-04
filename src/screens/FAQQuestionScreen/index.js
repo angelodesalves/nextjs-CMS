@@ -35,6 +35,7 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
+			cmsContent: data,
       id,
       title: data.contentFaqQuestion.title,
       content: data.contentFaqQuestion.content,
@@ -42,7 +43,8 @@ export async function getStaticProps({ params }) {
   }
 }
 
-export default function FAQQuestionScreen({ title, content }) {
+export default function FAQQuestionScreen({ cmsContent }) {
+	console.log(cmsContent);
   return (
     <>
       <Head>
@@ -69,12 +71,12 @@ export default function FAQQuestionScreen({ title, content }) {
           }}
         >
           <Text tag="h1" variant="heading1">
-            {title}
+            {cmsContent.contentFaqQuestion.title}
           </Text>
 
           {/* <Box dangerouslySetInnerHTML={{ __html: content }} /> */}
 					<StructuredText 
-						data={content}
+						data={cmsContent.contentFaqQuestion.content}
 						customNodeRules={[
 							renderNodeRule(isHeading, ({ node, children, key }) => {
 								const tag = `h${node.level}`;
@@ -95,7 +97,7 @@ export default function FAQQuestionScreen({ title, content }) {
         </Box>
       </Box>
 
-      <Footer />
+      <Footer description={cmsContent.globalContent.globalFooter.description} />
     </>
   )
 }
