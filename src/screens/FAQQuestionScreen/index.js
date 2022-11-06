@@ -46,7 +46,6 @@ export async function getStaticProps({ params, preview }) {
 }
 
 export default function FAQQuestionScreen({ cmsContent }) {
-	console.log(cmsContent);
   return (
     <CMSProvider cmsContent={cmsContent}>
       <Head>
