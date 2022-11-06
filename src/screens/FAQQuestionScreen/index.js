@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { Footer } from '../../components/commons/Footer';
 import { Menu } from '../../components/commons/Menu';
 import { cmsService } from '../../infra/cms/cmsService';
+import CMSProvider from '../../infra/cms/CMSProvider';
 import { Box, Text, theme } from '../../theme/components';
 import { renderNodeRule, StructuredText } from 'react-datocms';
 import { isHeading } from 'datocms-structured-text-utils';
@@ -47,7 +48,7 @@ export async function getStaticProps({ params, preview }) {
 export default function FAQQuestionScreen({ cmsContent }) {
 	console.log(cmsContent);
   return (
-    <>
+    <CMSProvider cmsContent={cmsContent}>
       <Head>
         <title>FAQ - Alura</title>
       </Head>
@@ -98,7 +99,7 @@ export default function FAQQuestionScreen({ cmsContent }) {
         </Box>
       </Box>
 
-      <Footer description={cmsContent.globalContent.globalFooter.description} />
-    </>
+      <Footer />
+    </CMSProvider>
   )
 }
